@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.dao.UserDao" >
+  	<resultMap type="com.system.model.User" id="userMap">
+  		<id property="id" column="id"/>
+  		<result property="username" column="user_name"/>
+  		<result property="password" column="password"/>
+  		<association property="role" column="role_id" javaType="com.system.model.Role"  select="getRoleByUserId">
+  		</association>
+  	</resultMap>
+
+    <select id="getUserList" resultMap="userMap" parameterType="com.system.model.User">
+        SELECT  A.* FROM user A 
+        <where>
+        	<if test="id != null and id != ''">AND A.id=#{id}</if>
+        	<if test="username != null and username != ''">AND A.user_name=#{username}</if>
+        </where>
+    </select>
+  	
+  	<insert id="insertUser" parameterType="com.system.model.User" >
+  		insert into user (id,user_name,role_id,flag) values (#{id},#{userName},#{roleId},#{flag})
+  	</insert>
+  	
+  	<select  id="getRoleByUserId" parameterType="string" resultMap="com.system.dao.RoleDao.roleMap">
+  		select A.* from role A where A.id=#{id}
+  	</select>
+  	
+  	<select id="queryByUserName" parameterType="string" resultMap="userMap">
+  		select A.* from user A where A.user_name=#{name}
+  	</select>
+</mapper>
