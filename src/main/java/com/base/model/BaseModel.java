@@ -11,6 +11,7 @@ public class BaseModel implements Serializable{
 	protected String id;
 	protected Timestamp createTime;
 	protected Timestamp updateTime;
+	protected Integer push;//是否推送 0 代表未推送 1代表推送
 	public String getId() {
 		return id;
 	}

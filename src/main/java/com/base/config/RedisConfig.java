@@ -17,7 +17,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * @ClassName: RedisConfig
- * @Description: TODO
+ * @Description: redis类.
  * @author: gl
  * @date: 2018年1月17日 下午3:48:34
  */
@@ -38,9 +38,9 @@ public class RedisConfig {
 	//将redis缓存设置到spring缓存机制中    后续可以通过注解启动缓存
     @Bean(name="cacheManager")
     public CacheManager cacheManager(@Qualifier("redisTemplate")RedisTemplate<Object, Object> redisTemplate) {
-        String[] cacheNames = {"app_default", "users", "blogs", "goods", "configs", "info"};
+        String[] cacheNames = {"app_default", "users", "blogs", "goods", "configs", "info","spider"};
         RedisCacheManager redisCacheManager = new RedisCacheManager(redisTemplate, Arrays.asList(cacheNames));
-        redisCacheManager.setDefaultExpiration(18000);
+        redisCacheManager.setDefaultExpiration(86400);
         return redisCacheManager;
     }
     

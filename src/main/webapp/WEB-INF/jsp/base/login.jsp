@@ -11,6 +11,7 @@
 	<form action="http://localhost:8080/login" method="post">
 		<input type="text" name="username">
 		<input type="password" name="password">
+		<input type="checkbox" name="rememberMe" />记住我<br>
 		<input type="submit" />
 	</form>
 	<p>${error}</p><img src="http://localhost:8080/static/2.jpg">

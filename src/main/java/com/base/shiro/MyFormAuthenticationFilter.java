@@ -3,8 +3,10 @@ package com.base.shiro;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.apache.shiro.web.util.WebUtils;
 
 import com.system.model.User;
 
@@ -43,4 +45,20 @@ public class MyFormAuthenticationFilter extends FormAuthenticationFilter {
 
 	        return super.isAccessAllowed(request, response, mappedValue);
 	    }
+	 
+	 /**
+	  * @Description: 解决登录成功后再登录回到前一个请求的问题，改为重定向首页
+	  * @author: gl
+	  * @date: 2018年1月19日
+	  */
+	@Override
+	protected boolean onLoginSuccess(AuthenticationToken token,
+			Subject subject, ServletRequest request, ServletResponse response)
+			throws Exception {
+		WebUtils.getAndClearSavedRequest(request);//清除原来的地址
+		WebUtils.redirectToSavedRequest(request, response, "/index");
+		return false;
+	}
+	 
+	 
 }
