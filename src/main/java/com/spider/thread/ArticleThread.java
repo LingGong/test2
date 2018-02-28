@@ -5,19 +5,23 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 
+
+
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.base.util.SpringContextUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spider.cache.RedisArticleCache;
 import com.spider.model.Article;
 import com.spider.util.JsoupUtil;
 
 public class ArticleThread implements Runnable {
 	
-	private RedisArticleCache cache = (RedisArticleCache) SpringContextUtils.getBean(RedisArticleCache.class);
+	//private RedisArticleCache cache = (RedisArticleCache) SpringContextUtils.getBean(RedisArticleCache.class);
 	
     private AtomicBoolean  flag = null;
     private AtomicReference<String> nexturl=null; 
@@ -64,13 +68,32 @@ public class ArticleThread implements Runnable {
 					for(Element dateElement :element.select(".fenghk")){
 						datelist.add(dateElement.text());
 					}
-					a.setTime(StringUtil.join(datelist, " "));	
-					cache.insertArticle(a);
+					a.setTime(StringUtil.join(datelist, " "));
+					//爬区每条文章的具体内容
+					System.out.println(Thread.currentThread().getName()+":"+a.getUrl());
+					Document detailDocument=JsoupUtil.getDocument(a.getUrl());
+					String content=detailDocument.select(".new_cont.detail_con p").text();
+					a.setContent(content);
+					try {
+						System.out.println(new ObjectMapper().writeValueAsString(a));
+					} catch (JsonProcessingException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					//cache.insert(a);//存入缓存中
 				}
 			}
 			
 	}
-
+	
+	
+	public Article getDetailContent(Article a){
+		Document document=JsoupUtil.getDocument(a.getUrl());
+		
+		
+		
+		return null;
+	}
 	
 
 

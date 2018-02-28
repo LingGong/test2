@@ -10,7 +10,6 @@ import org.jsoup.select.Elements;
 import com.spider.model.Article;
 import com.spider.model.SpiderContent;
 import com.spider.util.JsoupUtil;
-import com.spider.util.SpiderAnalysis;
 
 /**   
 *    

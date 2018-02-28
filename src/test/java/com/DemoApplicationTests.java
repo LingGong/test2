@@ -29,6 +29,7 @@ import javax.annotation.Resource;
 
 
 
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,8 +45,8 @@ import com.spider.model.SpiderContent;
 import com.spider.template.BaiduSpider;
 import com.spider.template.Jk99Spider;
 import com.spider.template.QinBeiSpider;
+import com.spider.template.SpiderAnalysis;
 import com.spider.util.JsoupUtil;
-import com.spider.util.SpiderAnalysis;
 import com.system.service.UserService;
 
 @RunWith(SpringRunner.class)
@@ -85,7 +86,7 @@ public class DemoApplicationTests {
 //		} catch (JsonProcessingException e) {
 //			e.printStackTrace();
 //		}
-		SpiderAnalysis an=new Jk99Spider<Article>();
+		SpiderAnalysis an=new Jk99Spider();
 		an.getContent("http://nv.99.com.cn/nxbg/");
 		
 		

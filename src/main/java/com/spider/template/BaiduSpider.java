@@ -5,7 +5,6 @@ import org.jsoup.nodes.Element;
 
 import com.spider.model.SpiderContent;
 import com.spider.util.JsoupUtil;
-import com.spider.util.SpiderAnalysis;
 
 public class BaiduSpider<T> implements SpiderAnalysis {
 

@@ -11,10 +11,11 @@ import java.util.concurrent.atomic.AtomicReference;
 
 
 
+
+
 import com.spider.model.Article;
 import com.spider.model.SpiderContent;
 import com.spider.thread.ArticleThread;
-import com.spider.util.SpiderAnalysis;
 
 
 /**   
@@ -27,11 +28,11 @@ import com.spider.util.SpiderAnalysis;
 * 修改人：
 * 修改时间：
 * 修改备注：   
-* @version    
+* @version  1.0  
 *    
 */
 
-public class Jk99Spider<T> implements SpiderAnalysis {
+public class Jk99Spider implements SpiderAnalysis {
 	
 	
 	public SpiderContent<Article> getContent(String url) {
@@ -41,7 +42,8 @@ public class Jk99Spider<T> implements SpiderAnalysis {
 		ExecutorService executor = Executors.newFixedThreadPool(4);
 		while(flag.get()){
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(10);//防止主线程频繁询问 造成性能问题  相当于ScheduleExecutorService
+	      
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -53,7 +55,7 @@ public class Jk99Spider<T> implements SpiderAnalysis {
 	}
 	
 	public static void main(String[] args) {
-		Jk99Spider<Article> j=new Jk99Spider<Article>();
+		Jk99Spider j=new Jk99Spider();
 		j.getContent("http://nv.99.com.cn/nxbg/");
 	}
 }

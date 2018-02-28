@@ -5,6 +5,20 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
+
+/**   
+*    
+* 项目名称：test2   
+* 类名称：SpringContextUtils   
+* 类描述：   bean工具类 普通类调用spring注册的bean
+* 创建人：gl   
+* 创建时间：2018年2月24日 下午2:21:36   
+* 修改人：  
+* 修改时间：  
+* 修改备注：   
+* @version    
+*    
+*/
 @Component
 public class SpringContextUtils implements ApplicationContextAware {
 
