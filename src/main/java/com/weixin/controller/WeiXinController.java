@@ -74,13 +74,15 @@ public class WeiXinController {
 						       String respXml=wxCeypt.decryptMsg(msgSignature, timestamp, nonce, buf.toString());  
 						        
 						       Map<String, String> map =  XMLParse.extractMsg(respXml);
+						       //图灵机器人自动回复
+						       String msg=AutomaticReply.getReply(map.get("Content"), "",map.get("FromUserName"));
 						       
-						      // String msg=AutomaticReply.getReply(map.get("Content"), "",map.get("FromUserName"));
-						       System.out.println("////"+wxCeypt.encryptMsg("回复", timestamp, nonce));
-						       out.print(wxCeypt.encryptMsg("回复", timestamp, nonce));  
+						      
+						       out.print(wxCeypt.encryptMsg(AutomaticReply.getReplyXml(msg, map), timestamp, nonce));  
 						       out.close();
 							} catch (Exception e) {
 								// TODO: handle exception
+								e.printStackTrace();
 							};
 					
 			     

@@ -1,8 +1,8 @@
 package com.base.util;
 
 public class Constants {
-	//微信类请求
-	public static final String WEIXIN_SERVER = "https://gl.ngrok.xiaomiqiu.cn/weixin";
+	//微信类请求url
+	public static final String WEIXIN_SERVER = "https://gl.ngrok.xiaomiqiu.cn/weixin/msgIn";
 	
 	//微信回调令牌
 	public static final String  WEIXIN_TOKEN="a123456";

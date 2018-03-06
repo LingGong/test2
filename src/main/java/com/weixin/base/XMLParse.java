@@ -93,7 +93,6 @@ public class XMLParse {
 			int length=list.getLength();
 			for(int i=0;i<length;i++){
 				map.put(list.item(i).getNodeName(), list.item(i).getTextContent());
-				System.out.println("xml中的值"+"key:"+list.item(i).getNodeName()+"|||"+"value:"+list.item(i).getTextContent());
 			}
 			
 			return map;
